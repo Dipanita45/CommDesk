@@ -208,5 +208,3 @@ This project is licensed under the **MIT License**.
 ```
 
 
-
-That will make your GitHub repo look **very professional and attractive**.
