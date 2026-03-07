@@ -21,11 +21,11 @@ jobs:
       matrix:
         include:
           - os: ubuntu-24.04
-            args: ""
+            args: "--config src-tauri/tauri.release.conf.json"
           - os: windows-latest
-            args: ""
+            args: "--config src-tauri/tauri.release.conf.json"
           - os: macos-latest
-            args: ""
+            args: "--config src-tauri/tauri.release.conf.json"
 
     runs-on: ${{ matrix.os }}
 

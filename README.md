@@ -122,6 +122,8 @@ pnpm install
 | build | `pnpm build` | Type-check + production frontend build |
 | preview | `pnpm preview` | Preview built frontend |
 | tauri | `pnpm tauri` | Run Tauri CLI commands |
+| tauri:keys:generate | `pnpm tauri:keys:generate` | Generate updater signing keys |
+| tauri:build:signed | `pnpm tauri:build:signed` | Build signed updater artifacts |
 | lint | `pnpm lint` | Run ESLint |
 | lint:fix | `pnpm lint:fix` | Auto-fix lint issues |
 | format | `pnpm format` | Format all files with Prettier |
@@ -149,16 +151,20 @@ pnpm install
 # Run app in development mode
 pnpm tauri dev
 
-# Build production desktop bundles (current OS)
+# Build production desktop bundles (current OS, unsigned/local)
 pnpm tauri build
+
+
+pnpm tauri signer generate
 
 # Generate updater signing keys (IMPORTANT)
-pnpm tauri signer generate -- -w ~/.tauri/commdesk.key
+pnpm tauri:keys:generate
 
-# Use signing keys for local signed build
-export TAURI_SIGNING_PRIVATE_KEY="$(cat ~/.tauri/commdesk.key)"
-export TAURI_SIGNING_PRIVATE_KEY_PASSWORD=""
-pnpm tauri build
+# Direct equivalent (important: do not add an extra `--` before `-w`)
+pnpm tauri signer generate -w ~/.tauri/commdesk.key
+
+# Build signed updater artifacts (uses ~/.tauri/commdesk.key by default)
+pnpm tauri:build:signed
 
 # Release version
 git add .
@@ -179,6 +185,8 @@ flatpak-builder --force-clean flatpak-build org.commdesk.CommDesk.json
 ```bash
 pnpm tauri build
 ```
+
+Use `pnpm tauri:build:signed` when you need updater artifacts/signatures.
 
 Artifacts are generated in:
 
@@ -216,7 +224,13 @@ Configured in:
 ### 1) Generate updater signing keys
 
 ```bash
-pnpm tauri signer generate -- -w ~/.tauri/commdesk.key
+pnpm tauri:keys:generate
+```
+
+Direct command equivalent:
+
+```bash
+pnpm tauri signer generate -w ~/.tauri/commdesk.key
 ```
 
 This creates:
@@ -227,10 +241,14 @@ This creates:
 ### 2) Local signed build environment
 
 ```bash
-export TAURI_SIGNING_PRIVATE_KEY="$(cat ~/.tauri/commdesk.key)"
-export TAURI_SIGNING_PRIVATE_KEY_PASSWORD=""
-pnpm tauri build
+pnpm tauri:build:signed
 ```
+
+The signed build script resolves key path in this order:
+
+1. `TAURI_SIGNING_PRIVATE_KEY` (if already set)
+2. `TAURI_SIGNING_PRIVATE_KEY_PATH` (custom key file path)
+3. `~/.tauri/commdesk.key` (default)
 
 ### 3) GitHub Actions secrets
 

@@ -123,7 +123,7 @@ Key behavior:
 Run once on a secure machine:
 
 ```bash
-pnpm tauri signer generate -- -w ~/.tauri/commdesk.key
+pnpm tauri signer generate -w ~/.tauri/commdesk.key
 ```
 
 This outputs:
