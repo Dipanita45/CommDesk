@@ -21,7 +21,8 @@ declare module "markdown-to-jsx" {
   };
 
   export default function Markdown(props: MarkdownProps): React.ReactElement;
-}declare module "markdown-to-jsx" {
+}
+declare module "markdown-to-jsx" {
   import type { ComponentType, ReactElement } from "react";
 
   export type MarkdownToJsxOverride = {
