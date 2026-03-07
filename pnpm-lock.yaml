@@ -72,6 +72,9 @@ importers:
       '@tauri-apps/cli':
         specifier: ^2
         version: 2.10.0
+      '@types/markdown-to-jsx':
+        specifier: ^7.0.1
+        version: 7.0.1(react@19.2.4)
       '@types/react':
         specifier: ^19.1.8
         version: 19.2.14
@@ -1628,6 +1631,10 @@ packages:
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
+
+  '@types/markdown-to-jsx@7.0.1':
+    resolution: {integrity: sha512-m9WVgoC+xggBNuaqHj/ONk6erCr2S+ok18/OdDovlqD3UCHyRA66o/y5QvTrQhm2XEeDwz/zA89jyrEykSm2wg==}
+    deprecated: This is a stub types definition. markdown-to-jsx provides its own type definitions, so you do not need this installed.
 
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
@@ -4874,6 +4881,15 @@ snapshots:
   '@types/estree@1.0.8': {}
 
   '@types/json-schema@7.0.15': {}
+
+  '@types/markdown-to-jsx@7.0.1(react@19.2.4)':
+    dependencies:
+      markdown-to-jsx: 9.7.8(react@19.2.4)
+    transitivePeerDependencies:
+      - react
+      - react-native
+      - solid-js
+      - vue
 
   '@types/react-dom@19.2.3(@types/react@19.2.14)':
     dependencies:
