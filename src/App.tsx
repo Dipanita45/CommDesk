@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "./App.css";
@@ -8,8 +9,13 @@ import AddMemberPage from "./features/AddMember/v1/Page/AddMemberPage";
 import CreateNewEvent from "./features/Events/v1/Pages/CreateNewEvent";
 import Contact from "./features/Contact_And_Support/v1/Pages/Contact";
 import ViewEvent from "./features/Events/v1/Pages/ViewEvent";
+import { startAutoUpdater } from "./system/updater/autoUpdater";
 
 function App() {
+  useEffect(() => {
+    void startAutoUpdater();
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
