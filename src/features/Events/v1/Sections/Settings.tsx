@@ -1,6 +1,4 @@
 import { getTheme } from "@/config/them.config";
-import React from "react";
-import { FaToggleOn } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
 import EventSetting from "../Components/EventSetting";
 

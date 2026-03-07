@@ -1,5 +1,4 @@
 import { getTheme } from "@/config/them.config";
-import React from "react";
 import Event_View_Header from "../Sections/Event_View_Header";
 
 const ViewEvent = () => {
