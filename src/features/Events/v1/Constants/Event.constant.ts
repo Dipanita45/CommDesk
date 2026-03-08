@@ -97,6 +97,47 @@ export const PARTNERS_AND_SPONSORS_TIER = [
   "official partner",
 ];
 
+export const SPONSOR_CATEGORY = [
+  "Title Sponsor",
+  "Presenting Sponsor",
+  "Co-Presenting Sponsor",
+  "Diamond Sponsor",
+  "Platinum Sponsor",
+  "Premier Sponsor",
+  "Elite Sponsor",
+  "Gold Sponsor",
+  "Silver Sponsor",
+  "Bronze Sponsor",
+  "Knowledge Sponsor",
+  "Education Sponsor",
+  "Learning Sponsor",
+  "Media Sponsor",
+  "Press Sponsor",
+  "Broadcast Sponsor",
+  "Support Sponsor",
+  "Associate Sponsor",
+  "Contributor Sponsor",
+  "Community Sponsor",
+  "Ecosystem Sponsor",
+];
+
+export const PARTNER_CATEGORY = [
+  "Official Partner",
+  "Community Partner",
+  "Ecosystem Partner",
+  "Knowledge Partner",
+  "Media Partner",
+  "Support Partner",
+  "Associate Partner",
+  "Strategic Partner",
+  "Innovation Partner",
+  "Technology Partner",
+  "Outreach Partner",
+  "Venue Partner",
+];
+
+export const PARTNERS_AND_SPONSORS_CATEGORY = [...SPONSOR_CATEGORY, ...PARTNER_CATEGORY];
+
 export const CATEGORY_ACCENT_RULES: Array<{ keywords: string[]; accent: CategoryAccent }> = [
   {
     keywords: ["title", "presenting", "co-presenting", "diamond"],
