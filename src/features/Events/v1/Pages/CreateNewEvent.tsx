@@ -1,4 +1,7 @@
 import { getTheme } from "../../../../config/them.config";
+import Judge from "../Components/Judge";
+import Mentors from "../Components/Mentors";
+import Speakers from "../Components/Speakers";
 import Capacity_And_Registration from "../Sections/Capacity_And_Registration";
 import DateAndSchedule from "../Sections/DateAndSchedule";
 import Event_Basic_Info from "../Sections/Event_Basic_Info";
@@ -17,8 +20,11 @@ const CreateNewEvent = () => {
           <DateAndSchedule />
           <Capacity_And_Registration />
         </div>
-        <div className="w-[35%] h-screen  rounded-2xl">
+        <div className="w-[35%] h-screen rounded-2xl space-y-5  pr-1">
           <Settings />
+          <Speakers />
+          <Mentors />
+          <Judge />
         </div>
       </div>
     </div>

@@ -53,25 +53,25 @@ It provides one desktop workspace for:
 
 ## Roles
 
-| Role | Description |
-| --- | --- |
-| Visitor | View public information |
-| Member | Participate in events and hackathons |
-| Volunteer | Assist with community operations |
-| Organizer | Manage events and programs |
-| Admin | Full platform control |
+| Role      | Description                          |
+| --------- | ------------------------------------ |
+| Visitor   | View public information              |
+| Member    | Participate in events and hackathons |
+| Volunteer | Assist with community operations     |
+| Organizer | Manage events and programs           |
+| Admin     | Full platform control                |
 
 ---
 
 ## Tech Stack
 
-| Layer | Technologies |
-| --- | --- |
-| Desktop App | Tauri v2, React, TypeScript, Vite |
-| UI | Tailwind CSS |
-| Runtime | Rust + Tauri |
+| Layer        | Technologies                           |
+| ------------ | -------------------------------------- |
+| Desktop App  | Tauri v2, React, TypeScript, Vite      |
+| UI           | Tailwind CSS                           |
+| Runtime      | Rust + Tauri                           |
 | Auto Updates | GitHub Releases + Tauri updater plugin |
-| Packaging | Tauri bundles + Flatpak (Linux) |
+| Packaging    | Tauri bundles + Flatpak (Linux)        |
 
 ---
 
@@ -116,18 +116,18 @@ pnpm install
 
 ## Important Scripts
 
-| Script | Command | Purpose |
-| --- | --- | --- |
-| dev | `pnpm dev` | Start Vite dev server |
-| build | `pnpm build` | Type-check + production frontend build |
-| preview | `pnpm preview` | Preview built frontend |
-| tauri | `pnpm tauri` | Run Tauri CLI commands |
-| tauri:keys:generate | `pnpm tauri:keys:generate` | Generate updater signing keys |
-| tauri:build:signed | `pnpm tauri:build:signed` | Build signed updater artifacts |
-| lint | `pnpm lint` | Run ESLint |
-| lint:fix | `pnpm lint:fix` | Auto-fix lint issues |
-| format | `pnpm format` | Format all files with Prettier |
-| format:check | `pnpm format:check` | Validate formatting |
+| Script              | Command                    | Purpose                                |
+| ------------------- | -------------------------- | -------------------------------------- |
+| dev                 | `pnpm dev`                 | Start Vite dev server                  |
+| build               | `pnpm build`               | Type-check + production frontend build |
+| preview             | `pnpm preview`             | Preview built frontend                 |
+| tauri               | `pnpm tauri`               | Run Tauri CLI commands                 |
+| tauri:keys:generate | `pnpm tauri:keys:generate` | Generate updater signing keys          |
+| tauri:build:signed  | `pnpm tauri:build:signed`  | Build signed updater artifacts         |
+| lint                | `pnpm lint`                | Run ESLint                             |
+| lint:fix            | `pnpm lint:fix`            | Auto-fix lint issues                   |
+| format              | `pnpm format`              | Format all files with Prettier         |
+| format:check        | `pnpm format:check`        | Validate formatting                    |
 
 Most used commands:
 

@@ -91,12 +91,7 @@ tauri::Builder::default()
 
 ```json
 {
-  "permissions": [
-    "core:default",
-    "opener:default",
-    "updater:default",
-    "process:default"
-  ]
+  "permissions": ["core:default", "opener:default", "updater:default", "process:default"]
 }
 ```
 
