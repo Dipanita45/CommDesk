@@ -212,3 +212,8 @@ export const CATEGORY_ACCENT_RULES: Array<{ keywords: string[]; accent: Category
     },
   },
 ];
+
+
+
+
+export let EventTabs = ["Upcoming Events", "Past Events" , 'Archived'];
