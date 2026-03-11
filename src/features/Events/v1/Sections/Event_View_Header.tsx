@@ -5,13 +5,9 @@ import { IoMdAdd } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { EventTabs } from "../Constants/Event.constant";
 
-
-
-
 const Event_View_Header = () => {
   const navigate = useNavigate();
   let [SelectedTab, setSelectedTab] = useState("Upcoming Events");
-
 
   let HandleSelectedTab = useCallback((tab: string) => {
     setSelectedTab(tab);
@@ -41,7 +37,9 @@ const Event_View_Header = () => {
           <button
             key={tab}
             className={`px-4 py-2 border-b-4  ease-in duration-200 ${
-              SelectedTab === tab ? " text-blue-500 border-blue-600" : " text-gray-700 border-transparent"
+              SelectedTab === tab
+                ? " text-blue-500 border-blue-600"
+                : " text-gray-700 border-transparent"
             }`}
             onClick={() => HandleSelectedTab(tab)}
           >
