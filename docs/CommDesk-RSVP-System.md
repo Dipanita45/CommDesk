@@ -710,6 +710,7 @@ Admin actions:
 
 Related system documents:
 
+- [CommDesk Participant Platform System](./CommDesk-Participant-Platform-System.md)
 - [CommDesk Event System](./CommDesk-Event-System.md)
 - [CommDesk Judging System](./CommDesk-Judging-System.md)
 - [CommDesk Member Creation and Onboarding System](./CommDesk-Member-System.md)

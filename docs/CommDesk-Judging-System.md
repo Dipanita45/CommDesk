@@ -773,6 +773,7 @@ Do not ship without these judge system fields.
 
 Related documents:
 
+- [CommDesk Participant Platform System](./CommDesk-Participant-Platform-System.md)
 - [CommDesk Event System](./CommDesk-Event-System.md)
 - [CommDesk RSVP System](./CommDesk-RSVP-System.md)
 - [CommDesk Member Creation & Onboarding System](./CommDesk-Member-System.md)

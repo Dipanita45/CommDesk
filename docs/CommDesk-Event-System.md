@@ -16,6 +16,7 @@ This version removes standalone Participant schema duplication and uses CommDesk
 
 Related documents:
 
+- [CommDesk Participant Platform System](./CommDesk-Participant-Platform-System.md)
 - [CommDesk Judging System](./CommDesk-Judging-System.md)
 - [CommDesk RSVP System](./CommDesk-RSVP-System.md)
 - [CommDesk Member Creation & Onboarding System](./CommDesk-Member-System.md)
