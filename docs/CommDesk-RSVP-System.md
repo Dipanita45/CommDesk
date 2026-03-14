@@ -711,6 +711,7 @@ Admin actions:
 Related system documents:
 
 - [CommDesk Event System](./CommDesk-Event-System.md)
+- [CommDesk Judging System](./CommDesk-Judging-System.md)
 - [CommDesk Member Creation and Onboarding System](./CommDesk-Member-System.md)
 - [Community Signup System](./Community-Signup-System.md)
 
