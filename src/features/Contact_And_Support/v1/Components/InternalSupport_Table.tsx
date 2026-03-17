@@ -93,26 +93,26 @@ const InternalSupport_Table = () => {
   const theme = getTheme("light");
 
   return (
-    <div className="w-full h-fit">
-      <table className="w-full  border-collapse">
+    <div className="w-full h-fit overflow-x-auto">
+      <table className="w-full min-w-[680px] border-collapse">
         <thead>
           <tr
-            className="text-md font-semibold uppercase tracking-wider py-[3vh]"
+            className="text-xs sm:text-sm font-semibold uppercase tracking-wider"
             style={{ background: theme.background.secondary, color: theme.textColor.secondary }}
           >
-            <th className="text-left px-5 py-3">Team Member</th>
-            <th className="text-left px-5 py-3">Role / Department</th>
-            <th className="text-left px-5 py-3">Email Address</th>
-            <th className="text-center px-5 py-3">Actions</th>
+            <th className="text-left px-3 sm:px-5 py-3">Team Member</th>
+            <th className="text-left px-3 sm:px-5 py-3">Role / Department</th>
+            <th className="text-left px-3 sm:px-5 py-3">Email Address</th>
+            <th className="text-center px-3 sm:px-5 py-3">Actions</th>
           </tr>
         </thead>
 
         <tbody style={{ background: theme.background.primary }}>
-          {MEMBERS.map((member, idx) => {
+          {MEMBERS.map((member) => {
             return (
               <tr key={member.id} className="group transition-colors hover:bg-[#f8fafc]">
                 {/* Team Member */}
-                <td className="px-5 py-3.5">
+                <td className="px-3 sm:px-5 py-3.5">
                   <div className="flex items-center gap-3">
                     <div className="relative flex-shrink-0">
                       <div
@@ -126,7 +126,7 @@ const InternalSupport_Table = () => {
                       />
                     </div>
                     <span
-                      className="font-medium text-md"
+                      className="font-medium text-sm sm:text-base"
                       style={{ color: theme.textColor.primary }}
                     >
                       {member.name}
@@ -135,10 +135,10 @@ const InternalSupport_Table = () => {
                 </td>
 
                 {/* Role / Department */}
-                <td className="px-5 py-3.5">
+                <td className="px-3 sm:px-5 py-3.5">
                   <div className="flex flex-col gap-1">
                     <span
-                      className="text-md w-fit p-3 rounded-lg  text-gray-600  font-bold"
+                      className="text-xs sm:text-sm w-fit px-3 py-2 rounded-lg text-gray-600 font-bold"
                       style={{ background: theme.background.secondary }}
                     >
                       {member.role}
@@ -147,14 +147,14 @@ const InternalSupport_Table = () => {
                 </td>
 
                 {/* Email */}
-                <td className="px-5 py-3.5">
-                  <span className="text-md" style={{ color: theme.textColor.secondary }}>
+                <td className="px-3 sm:px-5 py-3.5">
+                  <span className="text-xs sm:text-sm break-all" style={{ color: theme.textColor.secondary }}>
                     {member.email}
                   </span>
                 </td>
 
                 {/* Actions */}
-                <td className="px-5 py-3.5">
+                <td className="px-3 sm:px-5 py-3.5">
                   <div className="flex items-center justify-center gap-1">
                     <a
                       href={`mailto:${member.email}`}

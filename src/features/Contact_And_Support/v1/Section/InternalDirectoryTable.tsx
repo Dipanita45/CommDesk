@@ -7,7 +7,7 @@ const InternalDirectoryTable = () => {
 
   return (
     <div
-      className="w-[90vw] lg:w-[50vw] flex h-full rounded-xl border-2"
+      className="w-full min-w-0 flex rounded-xl border-2 overflow-hidden"
       style={{ borderColor: theme.borderColor.primary }}
     >
       <div className="flex flex-col w-full h-fit">
