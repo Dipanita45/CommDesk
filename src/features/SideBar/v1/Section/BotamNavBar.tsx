@@ -58,7 +58,9 @@ const BotamNavBar = () => {
       >
         <div
           className="pointer-events-none absolute inset-x-10 top-0 h-px"
-          style={{ background: "linear-gradient(90deg, transparent, rgba(48,110,232,0.45), transparent)" }}
+          style={{
+            background: "linear-gradient(90deg, transparent, rgba(48,110,232,0.45), transparent)",
+          }}
         />
 
         {navItems.map((item) => {
@@ -77,7 +79,8 @@ const BotamNavBar = () => {
                 style={{
                   opacity: active ? 1 : 0,
                   borderColor: "rgba(48, 110, 232, 0.12)",
-                  background: "linear-gradient(180deg, rgba(48,110,232,0.18), rgba(48,110,232,0.06))",
+                  background:
+                    "linear-gradient(180deg, rgba(48,110,232,0.18), rgba(48,110,232,0.06))",
                 }}
               />
 

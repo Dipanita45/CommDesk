@@ -488,7 +488,10 @@ export const createRSVPSchema = z
     teamSize: z.number().int().min(1),
 
     leader: participantSchema.extend({
-      aadhaarNumber: z.string().regex(/^\d{12}$/).optional(),
+      aadhaarNumber: z
+        .string()
+        .regex(/^\d{12}$/)
+        .optional(),
     }),
 
     members: z.array(participantSchema).default([]),

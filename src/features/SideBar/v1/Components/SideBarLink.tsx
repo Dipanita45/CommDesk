@@ -42,7 +42,10 @@ const SideBarLink = ({ icon, text, link }: SideBarLinkProps) => {
       >
         {icon}
       </div>
-      <span className="link-text hidden lg:block " style={{ marginLeft: 8, fontSize: "1.1em", fontWeight: 500 }}>
+      <span
+        className="link-text hidden lg:block "
+        style={{ marginLeft: 8, fontSize: "1.1em", fontWeight: 500 }}
+      >
         {text}
       </span>
     </Link>
