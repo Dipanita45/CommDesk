@@ -108,53 +108,47 @@ This section includes production-ready schema shapes for judge login and scoring
 ## 5.1 EventJudgeAssignment
 
 ```ts
-EventJudgeAssignment
+EventJudgeAssignment;
 {
- _id: ObjectId
+  _id: ObjectId;
 
- eventId: ObjectId
- communityId: ObjectId
+  eventId: ObjectId;
+  communityId: ObjectId;
 
- userId: ObjectId
- memberId: ObjectId
+  userId: ObjectId;
+  memberId: ObjectId;
 
- displayProfile:
- {
-  name: String
-  title: String
-  company: String
-  bio: String
-  avatarUrl: String
- }
+  displayProfile: {
+    name: String;
+    title: String;
+    company: String;
+    bio: String;
+    avatarUrl: String;
+  }
 
- expertiseTags: [String]
+  expertiseTags: [String];
 
- status:
-   "Invited"
-   | "Active"
-   | "Disabled"
+  status: "Invited" | "Active" | "Disabled";
 
- access:
- {
-  role: "Judge" | "LeadJudge"
-  canScore: Boolean
-  canFinalize: Boolean
-  canUnlockScore: Boolean
- }
+  access: {
+    role: "Judge" | "LeadJudge";
+    canScore: Boolean;
+    canFinalize: Boolean;
+    canUnlockScore: Boolean;
+  }
 
- transparency:
- {
-  judgingVisible: Boolean
-  showNamePublic: Boolean
- }
+  transparency: {
+    judgingVisible: Boolean;
+    showNamePublic: Boolean;
+  }
 
- invitedBy: ObjectId
- invitedAt: Date
- acceptedAt: Date
- lastLoginAt: Date
+  invitedBy: ObjectId;
+  invitedAt: Date;
+  acceptedAt: Date;
+  lastLoginAt: Date;
 
- createdAt: Date
- updatedAt: Date
+  createdAt: Date;
+  updatedAt: Date;
 }
 ```
 
@@ -166,30 +160,29 @@ Required indexes:
 ## 5.2 EventJudgingCriteria
 
 ```ts
-EventJudgingCriteria
+EventJudgingCriteria;
 {
- _id: ObjectId
+  _id: ObjectId;
 
- eventId: ObjectId
- communityId: ObjectId
+  eventId: ObjectId;
+  communityId: ObjectId;
 
+  name: String;
+  description: String;
 
- name: String
- description: String
+  maxScore: Number;
+  weight: Number;
 
- maxScore: Number
- weight: Number
+  required: Boolean;
+  visibleToPublic: Boolean;
 
- required: Boolean
- visibleToPublic: Boolean
+  order: Number;
 
- order: Number
+  createdBy: ObjectId;
+  updatedBy: ObjectId;
 
- createdBy: ObjectId
- updatedBy: ObjectId
-
- createdAt: Date
- updatedAt: Date
+  createdAt: Date;
+  updatedAt: Date;
 }
 ```
 
@@ -331,60 +324,58 @@ Required indexes:
 ## 5.5 EventLeaderboardCache (Optional)
 
 ```ts
-EventLeaderboardCache
+EventLeaderboardCache;
 {
- _id: ObjectId
+  _id: ObjectId;
 
- eventId: ObjectId
- submissionId: ObjectId
- teamId: ObjectId
+  eventId: ObjectId;
+  submissionId: ObjectId;
+  teamId: ObjectId;
 
- rank: Number
- averageScore: Number
- weightedAverageScore: Number
- judgeCount: Number
+  rank: Number;
+  averageScore: Number;
+  weightedAverageScore: Number;
+  judgeCount: Number;
 
- tieBreakerMeta:
- {
-  highestSingleJudgeScore: Number
-  scoreStdDeviation: Number
-  earliestSubmittedAt: Date
- }
+  tieBreakerMeta: {
+    highestSingleJudgeScore: Number;
+    scoreStdDeviation: Number;
+    earliestSubmittedAt: Date;
+  }
 
- updatedAt: Date
+  updatedAt: Date;
 }
 ```
 
 ## 5.6 JudgingAudit
 
 ```ts
-JudgingAudit
+JudgingAudit;
 {
- _id: ObjectId
+  _id: ObjectId;
 
- eventId: ObjectId
- communityId: ObjectId
- submissionId: ObjectId
- judgeId: ObjectId
- actorUserId: ObjectId
+  eventId: ObjectId;
+  communityId: ObjectId;
+  submissionId: ObjectId;
+  judgeId: ObjectId;
+  actorUserId: ObjectId;
 
- action:
-   "InviteSent"
-   | "InviteAccepted"
-   | "JudgeLogin"
-   | "ScoreDraftSaved"
-   | "ScoreSubmitted"
-   | "ScoreUnlockRequested"
-   | "ScoreUnlocked"
-   | "ScoreFinalized"
-   | "JudgingRoundFinalized"
+  action: "InviteSent" |
+    "InviteAccepted" |
+    "JudgeLogin" |
+    "ScoreDraftSaved" |
+    "ScoreSubmitted" |
+    "ScoreUnlockRequested" |
+    "ScoreUnlocked" |
+    "ScoreFinalized" |
+    "JudgingRoundFinalized";
 
- metadata: Mixed
+  metadata: Mixed;
 
- ipAddress: String
- userAgent: String
+  ipAddress: String;
+  userAgent: String;
 
- createdAt: Date
+  createdAt: Date;
 }
 ```
 
@@ -395,20 +386,20 @@ JudgingAudit
 Store in event-level settings.
 
 ```ts
-judgingSettings
+judgingSettings;
 {
- mode: "Private" | "Transparent"
+  mode: "Private" | "Transparent";
 
- showJudgeNames: Boolean
- showCriteria: Boolean
- showFeedback: Boolean
+  showJudgeNames: Boolean;
+  showCriteria: Boolean;
+  showFeedback: Boolean;
 
- publishTiming: "Live" | "AfterRoundComplete" | "AfterEventComplete"
+  publishTiming: "Live" | "AfterRoundComplete" | "AfterEventComplete";
 
- lockEditsAfterSubmit: Boolean
- allowLeadJudgeUnlock: Boolean
+  lockEditsAfterSubmit: Boolean;
+  allowLeadJudgeUnlock: Boolean;
 
- minJudgeCountForLeaderboard: Number
+  minJudgeCountForLeaderboard: Number;
 }
 ```
 

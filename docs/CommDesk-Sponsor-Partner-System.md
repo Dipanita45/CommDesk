@@ -787,60 +787,51 @@ Long-term program support:
 ## 25.1 SponsorPartnerOrganization
 
 ```ts
-SponsorPartnerOrganization
+SponsorPartnerOrganization;
 {
- _id: ObjectId
+  _id: ObjectId;
 
- legalName: String
- displayName: String
+  legalName: String;
+  displayName: String;
 
- entityType:
-   "Sponsor"
-   | "Partner"
-   | "SponsorAndPartner"
+  entityType: "Sponsor" | "Partner" | "SponsorAndPartner";
 
- logoUrl: String
- website: String
+  logoUrl: String;
+  website: String;
 
- industry: String
- description: String
+  industry: String;
+  description: String;
 
- technologies: [String]
- developerTools: [String]
+  technologies: [String];
+  developerTools: [String];
 
- preferredEventTypes: [String]
- supportedRegions: [String]
- supportedCommunityTypes: [String]
+  preferredEventTypes: [String];
+  supportedRegions: [String];
+  supportedCommunityTypes: [String];
 
- budgetRange:
- {
-  min: Number
-  max: Number
-  currency: String
- }
+  budgetRange: {
+    min: Number;
+    max: Number;
+    currency: String;
+  }
 
- availableSponsorshipTypes: [String]
+  availableSponsorshipTypes: [String];
 
- verificationStatus:
-   "Verified"
-   | "Pending Verification"
-   | "Community Added"
-   | "Disabled"
+  verificationStatus: "Verified" | "Pending Verification" | "Community Added" | "Disabled";
 
- reputationScore: Number
+  reputationScore: Number;
 
- contact:
- {
-  primaryName: String
-  primaryEmail: String
-  primaryRole: String
-  devRelEmail: String
-  hiringEmail: String
- }
+  contact: {
+    primaryName: String;
+    primaryEmail: String;
+    primaryRole: String;
+    devRelEmail: String;
+    hiringEmail: String;
+  }
 
- createdBy: ObjectId
- createdAt: Date
- updatedAt: Date
+  createdBy: ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
 }
 ```
 
@@ -853,86 +844,75 @@ Recommended indexes:
 ## 25.2 SponsorshipRequest
 
 ```ts
-SponsorshipRequest
+SponsorshipRequest;
 {
- _id: ObjectId
+  _id: ObjectId;
 
- communityId: ObjectId
- eventId: ObjectId
- organizationId: ObjectId
+  communityId: ObjectId;
+  eventId: ObjectId;
+  organizationId: ObjectId;
 
- requestedByUserId: ObjectId
+  requestedByUserId: ObjectId;
 
- eventName: String
- eventType: String
- expectedParticipants: Number
+  eventName: String;
+  eventType: String;
+  expectedParticipants: Number;
 
- requestedCategory: String
- requestedBudget: Number
- requestedCurrency: String
+  requestedCategory: String;
+  requestedBudget: Number;
+  requestedCurrency: String;
 
- message: String
- benefitProposal: [String]
+  message: String;
+  benefitProposal: [String];
 
- status:
-   "Pending"
-   | "Negotiation"
-   | "Accepted"
-   | "Rejected"
-   | "Withdrawn"
-   | "Expired"
+  status: "Pending" | "Negotiation" | "Accepted" | "Rejected" | "Withdrawn" | "Expired";
 
- negotiation:
- {
-  counterBudget: Number
-  counterCurrency: String
-  terms: [String]
-  notes: String
- }
+  negotiation: {
+    counterBudget: Number;
+    counterCurrency: String;
+    terms: [String];
+    notes: String;
+  }
 
- createdAt: Date
- updatedAt: Date
+  createdAt: Date;
+  updatedAt: Date;
 }
 ```
 
 ## 25.3 EventSponsorAssignment
 
 ```ts
-EventSponsorAssignment
+EventSponsorAssignment;
 {
- _id: ObjectId
+  _id: ObjectId;
 
- communityId: ObjectId
- eventId: ObjectId
- organizationId: ObjectId
+  communityId: ObjectId;
+  eventId: ObjectId;
+  organizationId: ObjectId;
 
- entityType:
-   "Sponsor"
-   | "Partner"
-   | "SponsorAndPartner"
+  entityType: "Sponsor" | "Partner" | "SponsorAndPartner";
 
- displayNameSnapshot: String
- logoUrlSnapshot: String
- websiteSnapshot: String
+  displayNameSnapshot: String;
+  logoUrlSnapshot: String;
+  websiteSnapshot: String;
 
- displayCategory: String
- tierKeyword: String
+  displayCategory: String;
+  tierKeyword: String;
 
- benefits: [String]
+  benefits: [String];
 
- visibility:
- {
-  showOnEventPage: Boolean
-  showOnParticipantWebsite: Boolean
-  showOnCertificates: Boolean
- }
+  visibility: {
+    showOnEventPage: Boolean;
+    showOnParticipantWebsite: Boolean;
+    showOnCertificates: Boolean;
+  }
 
- hiringEnabled: Boolean
+  hiringEnabled: Boolean;
 
- createdFromRequestId: ObjectId
- createdBy: ObjectId
- createdAt: Date
- updatedAt: Date
+  createdFromRequestId: ObjectId;
+  createdBy: ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
 }
 ```
 
@@ -943,93 +923,93 @@ Important rule:
 ## 25.4 SponsorChallenge
 
 ```ts
-SponsorChallenge
+SponsorChallenge;
 {
- _id: ObjectId
+  _id: ObjectId;
 
- eventId: ObjectId
- communityId: ObjectId
- organizationId: ObjectId
+  eventId: ObjectId;
+  communityId: ObjectId;
+  organizationId: ObjectId;
 
- title: String
- description: String
- eligibility: String
+  title: String;
+  description: String;
+  eligibility: String;
 
- requirements: [String]
- requiredTechnologies: [String]
+  requirements: [String];
+  requiredTechnologies: [String];
 
- prizeDescription: String
- judgingCriteria: [String]
+  prizeDescription: String;
+  judgingCriteria: [String];
 
- isPublished: Boolean
+  isPublished: Boolean;
 
- createdAt: Date
- updatedAt: Date
+  createdAt: Date;
+  updatedAt: Date;
 }
 ```
 
 ## 25.5 SponsorResource
 
 ```ts
-SponsorResource
+SponsorResource;
 {
- _id: ObjectId
+  _id: ObjectId;
 
- eventId: ObjectId
- organizationId: ObjectId
+  eventId: ObjectId;
+  organizationId: ObjectId;
 
- title: String
- resourceType: String
- url: String
- description: String
+  title: String;
+  resourceType: String;
+  url: String;
+  description: String;
 
- createdAt: Date
- updatedAt: Date
+  createdAt: Date;
+  updatedAt: Date;
 }
 ```
 
 ## 25.6 SponsorWorkshop
 
 ```ts
-SponsorWorkshop
+SponsorWorkshop;
 {
- _id: ObjectId
+  _id: ObjectId;
 
- eventId: ObjectId
- organizationId: ObjectId
+  eventId: ObjectId;
+  organizationId: ObjectId;
 
- title: String
- description: String
- speakerName: String
- speakerRole: String
- speakerCompany: String
+  title: String;
+  description: String;
+  speakerName: String;
+  speakerRole: String;
+  speakerCompany: String;
 
- scheduledAt: Date
- meetingUrl: String
- recordingUrl: String
+  scheduledAt: Date;
+  meetingUrl: String;
+  recordingUrl: String;
 
- createdAt: Date
- updatedAt: Date
+  createdAt: Date;
+  updatedAt: Date;
 }
 ```
 
 ## 25.7 SponsorRelationshipSummary (Optional Cached CRM View)
 
 ```ts
-SponsorRelationshipSummary
+SponsorRelationshipSummary;
 {
- _id: ObjectId
+  _id: ObjectId;
 
- organizationId: ObjectId
- communityId: ObjectId
+  organizationId: ObjectId;
+  communityId: ObjectId;
 
- eventsSupported: Number
- developersReached: Number
- projectsBuilt: Number
- workshopsHosted: Number
+  eventsSupported: Number;
+  developersReached: Number;
+  projectsBuilt: Number;
+  workshopsHosted: Number;
 
- lastEngagementAt: Date
- updatedAt: Date
+  lastEngagementAt: Date;
+  updatedAt: Date;
 }
 ```
 

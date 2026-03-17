@@ -17,7 +17,9 @@ const Event_View_Header = () => {
     <div className="pt-[3vh] bg-white border-b-[1px] border-gray-300 flex  flex-col text-xl font-bold  justify-between">
       <div className="flex w-full justify-between items-start">
         <div className="w-1/2 xl:w-fit flex flex-col">
-          <h1 className="text-lg sm:text-[2.5vw] lg:text-2xl   font-bold text-gray-800  ml-5 w-fit">Events</h1>
+          <h1 className="text-lg sm:text-[2.5vw] lg:text-2xl   font-bold text-gray-800  ml-5 w-fit">
+            Events
+          </h1>
           <p className=" text-lg  lg:text-md  text-gray-500 ml-5 mt-1 w-fit">
             Manage all your events in one place. Create, edit, and track event details with ease.
           </p>
