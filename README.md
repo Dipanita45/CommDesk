@@ -80,11 +80,11 @@ flowchart LR
   A --> B[React + TypeScript Frontend]
   A --> C[Rust Core\nsrc-tauri]
 
-  B --> D[Feature Modules\nDashboard | Member | Add Member | Events | Contact]
-  B --> E[Tauri Plugin Layer\nUpdater | Process | Opener]
+  B --> D[Feature Modules\nDashboard, Member, Add Member, Events, Contact]
+  B --> E[Tauri Plugin Layer\nUpdater, Process, Opener]
   E --> F[GitHub Releases\nlatest.json + signed assets]
 
-  C --> G[OS Capabilities\nWindowing | Native Process | Packaging]
+  C --> G[OS Capabilities\nWindowing, Native Process, Packaging]
 ```
 
 ### Target Platform Architecture (Roadmap)
