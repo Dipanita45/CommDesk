@@ -27,7 +27,6 @@ function App() {
           <Route path="/events" element={<ViewEvent />} />
           <Route path="/create-event" element={<CreateNewEvent />} />
           <Route path="/contact" element={<Contact />} />
-
           <Route path="*" element={<div>404 Not Found</div>} />
         </Route>
       </Routes>
