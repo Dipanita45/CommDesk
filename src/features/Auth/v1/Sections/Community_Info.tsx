@@ -1,4 +1,4 @@
-import { useState, Ref, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import Input from "@/Component/ui/Input";
 import TextArea from "@/Component/ui/TextArea";
 import Url from "@/Component/ui/Url";
@@ -7,42 +7,38 @@ import { MdPerson } from "react-icons/md";
 
 const Community_Info = () => {
   const [ImageUrl, setImageUrl] = useState<string>("");
-  const [ImageFile, setImageFile] = useState<File | null>(null);
   const [formData, setFormData] = useState({
     communityName: "",
     communityDescription: "",
+    city: "",
+    mobileNumber: "",
+    email: "",
   });
+  const ImageRef = useRef<HTMLInputElement | null>(null);
 
-  function handleFileSelection(event: React.ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
+  // Handle file input change and preview
+  const handleFileSelection = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
     if (file) {
-      console.log("Selected file:", file);
-      setImageFile(file);
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImageUrl(reader.result as string);
+      };
+      reader.readAsDataURL(file);
     }
+  }, []);
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      setImageUrl(reader.result as string);
-    };
-    reader.readAsDataURL(ImageFile as Blob);
-  }
-
-  let ImageRef = useRef<HTMLInputElement | null>(null);
-
-  console.log(ImageRef.current);
-
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-
+  // For custom Input/TextArea components
+  const handleChange = useCallback((name: string, value: string) => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
-  };
+  }, []);
 
   return (
     <div className="h-full w-full inter">
-      <div className="Title flex flex-col mb-[5vh]">
+      <div className="Title flex flex-col my-[3vh]">
         <h1 className="text-2xl font-bold inter text-gray-700">Community Info</h1>
         <p className="text-gray-500 mt-2 inter">Tell us about your community to get started.</p>
       </div>
@@ -57,7 +53,7 @@ const Community_Info = () => {
         />
 
         <div
-          className="w-full flex flex-col gap-3 my-[3vh]"
+          className="w-full flex flex-col gap-3 mt-[3vh] mb-[4vh]"
           onClick={() => ImageRef.current?.click()}
         >
           <div className="h-full w-full">Community Logo</div>
@@ -67,7 +63,7 @@ const Community_Info = () => {
                 <img
                   src={ImageUrl}
                   alt="Community Logo"
-                  className="rounded-full w-16 h-16 object-cover"
+                  className="rounded-full w-20 h-20 object-cover"
                 />
               ) : (
                 <MdPerson />
@@ -96,6 +92,26 @@ const Community_Info = () => {
           placeholder="Describe your community in a few sentences"
         />
 
+        <div className="flex gap-3 items-center justify-center w-full">
+          <Input
+            label="Mobile Number"
+            name="mobileNumber"
+            placeholder="Enter your mobile number"
+            value={formData.mobileNumber}
+            onChange={handleChange}
+            className="w-1/2"
+          />
+
+          <Input
+            label="Email"
+            name="email"
+            placeholder="Enter your email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-1/2"
+          />
+        </div>
+
         <div className="flex gap-3 items-center justify-center">
           <DropDown
             label="Country"
@@ -103,10 +119,16 @@ const Community_Info = () => {
             onSelect={(e) => console.log(e)}
           />
 
-          <Input label="City" placeholder="Enter your city" name="city" />
+          <Input
+            label="City"
+            placeholder="Enter your city"
+            name="city"
+            value={formData.city}
+            onChange={handleChange}
+          />
         </div>
 
-        <Url domain="https://" protocol="www.google.com" />
+        <Url domain="www.comunity.com" protocol="https://" />
       </div>
     </div>
   );

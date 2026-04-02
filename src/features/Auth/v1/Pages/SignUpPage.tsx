@@ -31,9 +31,9 @@ const SignUpPage = () => {
   let [currentStep, setCurrentStep] = React.useState(1);
 
   return (
-    <div className="w-screen h-screen  flex inter">
-      <div className="left w-1/2 bg-cover bg-center relative">
-        <div className="Logo_Container absolute top-0 left-0 w-full z-50 flex items-center ">
+    <div className="w-screen  flex inter">
+      <div className="left w-1/2 bg-cover bg-center relative top-0 bg-transparent ">
+        <div className="top-0 left-0 w-full z-50 flex items-center sticky ">
           <img src="/logoWithoutText.png" alt="Logo" className="w-16 h-16 " />
 
           <h1 className="text-2xl text-white ml-2 font-bold inter">CommDesk</h1>
@@ -67,12 +67,12 @@ const SignUpPage = () => {
           ))}
         </div>
 
-        <div className="Navigation_Buttons w-[80%] flex justify-end gap-4 mb-6  flex-col items-center overflow-y-scroll ">
+        <div className="Navigation_Buttons w-[80%] flex justify-end gap-4 mb-6  flex-col items-center overflow-x-hidden relative">
           {Steps[currentStep - 1].Element}
           <button
             onClick={() => setCurrentStep((prev) => Math.min(prev + 1, Steps.length))}
             disabled={currentStep === Steps.length}
-            className="w-full bg-[#4f46e5] text-white py-2  hover:bg-blue-600 transition duration-200 inter  text-lg"
+            className="w-full bg-[#4f46e5] text-white py-2  hover:bg-blue-600 transition duration-200 inter  mt-[2vh] text-lg"
           >
             Continue to Step {currentStep + 1}
           </button>
@@ -80,7 +80,7 @@ const SignUpPage = () => {
           <p className="text-gray-500">Cancel registration</p>
         </div>
 
-        <div className="w-[80%]  flex items-center justify-center py-[2vh]">
+        <div className="w-[80%] mt-[5vh]  flex items-center justify-center py-[2vh]">
           <p className="text-gray-500">
             Already have an account?{" "}
             <Link to="/" className="text-blue-500 hover:underline">

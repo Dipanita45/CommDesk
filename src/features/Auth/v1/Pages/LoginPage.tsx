@@ -61,7 +61,9 @@ const LoginPage = () => {
               type="submit"
               className="w-full bg-[#4f46e5] text-white py-2  hover:bg-blue-600 transition duration-200 inter py-[1.5vh] text-lg"
             >
-              Sign In to Dashboard
+              <Link to="/org/dashboard" className="w-full h-full block">
+                Sign In
+              </Link>
             </button>
 
             <div className="flex justify-end">
