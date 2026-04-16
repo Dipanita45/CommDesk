@@ -6,19 +6,37 @@ export const signupSchema = z.object({
   communityName: z.string().min(2, "Community name must be at least 2 characters"),
   communityBio: z.string().min(10, "Bio must be at least 10 characters"),
   communityLogo: z.string().optional(),
-  communityWebsite: z.string().url("Must be a valid URL").optional().or(z.literal("")),
+  communityWebsite: z
+    .string()
+    .optional()
+    .or(z.literal(""))
+    .refine((val) => !val || /^(?!https?:\/\/)([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/.*)?$/.test(val), {
+      message: "Enter domain only (e.g. example.com). Do not include http:// or https://",
+    })
+    .transform((val) => (val && val.trim() !== "" ? `https://${val}` : val)),
 
   country: z.string().min(1, "Country is required"),
   city: z.string().min(1, "City is required"),
   officialEmail: z.string().email("Must be a valid email"),
-  contactPhone: z.string().min(7, "Phone number is too short"),
+  phoneCode: z.string().min(1, "Code required"),
+  phoneNumber: z.string().min(7, "Phone number is too short").regex(/^\d+$/, "Numeric only"),
 
   socialLinks: z.object({
-    twitter: z.string().url("Must be a valid URL").optional().or(z.literal("")),
-    linkedin: z.string().url("Must be a valid URL").optional().or(z.literal("")),
-    instagram: z.string().url("Must be a valid URL").optional().or(z.literal("")),
-    github: z.string().url("Must be a valid URL").optional().or(z.literal("")),
-    facebook: z.string().url("Must be a valid URL").optional().or(z.literal("")),
+    twitter: z.string().optional().or(z.literal("")).refine((v) => !v || (v.startsWith("https://") && z.string().url().safeParse(v).success), {
+      message: "Must be a valid URL starting with https://",
+    }),
+    linkedin: z.string().optional().or(z.literal("")).refine((v) => !v || (v.startsWith("https://") && z.string().url().safeParse(v).success), {
+      message: "Must be a valid URL starting with https://",
+    }),
+    instagram: z.string().optional().or(z.literal("")).refine((v) => !v || (v.startsWith("https://") && z.string().url().safeParse(v).success), {
+      message: "Must be a valid URL starting with https://",
+    }),
+    github: z.string().optional().or(z.literal("")).refine((v) => !v || (v.startsWith("https://") && z.string().url().safeParse(v).success), {
+      message: "Must be a valid URL starting with https://",
+    }),
+    facebook: z.string().optional().or(z.literal("")).refine((v) => !v || (v.startsWith("https://") && z.string().url().safeParse(v).success), {
+      message: "Must be a valid URL starting with https://",
+    }),
   }),
 
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
@@ -34,7 +52,7 @@ export type SignupFormData = z.infer<typeof signupSchema>;
 
 export const STEP_FIELDS: Record<number, (keyof SignupFormData)[]> = {
   1: ["communityName", "communityBio", "communityWebsite"],
-  2: ["country", "city", "officialEmail", "contactPhone"],
+  2: ["country", "city", "officialEmail", "phoneCode", "phoneNumber"],
   3: ["socialLinks"],
   4: ["fullName", "email", "password"],
   5: [],
@@ -52,7 +70,8 @@ export function useSignupForm() {
       country: "",
       city: "",
       officialEmail: "",
-      contactPhone: "",
+      phoneCode: "+1",
+      phoneNumber: "",
       socialLinks: {
         twitter: "",
         linkedin: "",

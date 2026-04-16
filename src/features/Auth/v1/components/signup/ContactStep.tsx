@@ -1,5 +1,6 @@
-import { useFormContext } from "react-hook-form";
+import { useFormContext, Controller } from "react-hook-form";
 import { SignupFormData } from "../../hooks/useSignupForm";
+import { SearchableDropdown } from "../../../../Component/ui/SearchableDropdown";
 
 const COUNTRIES = [
   "Afghanistan", "Albania", "Algeria", "Australia", "Austria", "Bangladesh",
@@ -17,6 +18,7 @@ const COUNTRIES = [
 export default function ContactStep() {
   const {
     register,
+    control,
     formState: { errors },
   } = useFormContext<SignupFormData>();
 
@@ -30,31 +32,20 @@ export default function ContactStep() {
       </div>
 
       {/* Country */}
-      <div className="flex flex-col gap-1.5">
-        <label
-          htmlFor="country"
-          className="text-xs font-semibold text-gray-500 uppercase tracking-wide inter"
-        >
-          Country *
-        </label>
-        <select
-          id="country"
-          {...register("country")}
-          className={`w-full px-4 py-2.5 rounded-lg border text-sm outline-none transition-all bg-white inter ${
-            errors.country
-              ? "border-red-400 focus:ring-2 focus:ring-red-200"
-              : "border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-          }`}
-        >
-          <option value="">Select a country</option>
-          {COUNTRIES.map((c) => (
-            <option key={c} value={c}>{c}</option>
-          ))}
-        </select>
-        {errors.country && (
-          <span className="text-xs text-red-500">{errors.country.message}</span>
+      <Controller
+        name="country"
+        control={control}
+        render={({ field }) => (
+          <SearchableDropdown
+            label="Country *"
+            options={COUNTRIES}
+            value={field.value}
+            onChange={field.onChange}
+            placeholder="Select a country"
+            error={errors.country?.message}
+          />
         )}
-      </div>
+      />
 
       {/* City */}
       <div className="flex flex-col gap-1.5">
@@ -105,25 +96,58 @@ export default function ContactStep() {
 
       {/* Phone */}
       <div className="flex flex-col gap-1.5">
-        <label
-          htmlFor="contactPhone"
-          className="text-xs font-semibold text-gray-500 uppercase tracking-wide inter"
-        >
+        <label className="text-xs font-semibold text-gray-500 uppercase tracking-wide inter">
           Contact Phone *
         </label>
-        <input
-          id="contactPhone"
-          {...register("contactPhone")}
-          type="tel"
-          placeholder="+1 (555) 000-0000"
-          className={`w-full px-4 py-2.5 rounded-lg border text-sm outline-none transition-all inter ${
-            errors.contactPhone
-              ? "border-red-400 focus:ring-2 focus:ring-red-200"
-              : "border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-          }`}
-        />
-        {errors.contactPhone && (
-          <span className="text-xs text-red-500">{errors.contactPhone.message}</span>
+        <div className="flex gap-2">
+          {/* Country Code Selector */}
+          <div className="w-[110px] shrink-0">
+            <select
+              {...register("phoneCode")}
+              className={`w-full px-3 py-2.5 rounded-lg border text-sm outline-none transition-all bg-gray-50 inter cursor-pointer ${
+                errors.phoneCode
+                  ? "border-red-400 focus:ring-2 focus:ring-red-200"
+                  : "border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+              }`}
+            >
+              <option value="+1">+1 (US)</option>
+              <option value="+44">+44 (UK)</option>
+              <option value="+91">+91 (IN)</option>
+              <option value="+254">+254 (KE)</option>
+              <option value="+27">+27 (SA)</option>
+              <option value="+61">+61 (AU)</option>
+              <option value="+81">+81 (JP)</option>
+              <option value="+33">+33 (FR)</option>
+              <option value="+49">+49 (DE)</option>
+              <option value="+971">+971 (UAE)</option>
+            </select>
+          </div>
+
+          {/* Phone Number Input */}
+          <div className="flex-1">
+            <input
+              id="phoneNumber"
+              {...register("phoneNumber")}
+              type="text"
+              inputMode="numeric"
+              placeholder="000 000 000"
+              onKeyPress={(e) => {
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
+              className={`w-full px-4 py-2.5 rounded-lg border text-sm outline-none transition-all inter ${
+                errors.phoneNumber
+                  ? "border-red-400 focus:ring-2 focus:ring-red-200"
+                  : "border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+              }`}
+            />
+          </div>
+        </div>
+        {(errors.phoneCode || errors.phoneNumber) && (
+          <span className="text-xs text-red-500">
+            {errors.phoneCode?.message || errors.phoneNumber?.message}
+          </span>
         )}
       </div>
     </div>

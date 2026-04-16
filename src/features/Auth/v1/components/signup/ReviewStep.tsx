@@ -32,67 +32,76 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 }
 
 export default function ReviewStep() {
-  const { watch } = useFormContext<SignupFormData>();
+  const context = useFormContext<SignupFormData>();
+  if (!context) return <div className="p-4 text-red-600 bg-red-50 rounded-lg inter text-sm">Error: Form context unavailable.</div>;
+
+  const { watch } = context;
   const data = watch();
 
-  const hasSocials = Object.values(data.socialLinks ?? {}).some(Boolean);
+  if (!data) return <div className="p-4 text-gray-500 bg-gray-50 rounded-lg inter text-sm">No review data available.</div>;
+
+  const hasSocials = data.socialLinks ? Object.values(data.socialLinks).some(Boolean) : false;
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6 animate-in fade-in duration-500">
       <div className="mb-2">
-        <h2 className="text-2xl font-bold text-gray-800 inter">Review & Submit</h2>
+        <h2 className="text-2xl font-bold text-gray-800 inter tracking-tight">Review & Submit</h2>
         <p className="text-gray-500 text-sm mt-1 inter">
-          Confirm your details before submitting. You can go back to edit any step.
+          Almost there! Please verify your community details below.
         </p>
       </div>
 
       {/* Logo Preview */}
       {data.communityLogo && (
-        <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl border border-gray-200">
+        <div className="flex items-center gap-4 p-4 bg-indigo-50/50 rounded-2xl border border-indigo-100/50 backdrop-blur-sm">
           <img
             src={data.communityLogo}
             alt="Community Logo"
-            className="w-14 h-14 rounded-full object-cover border-2 border-indigo-200"
+            className="w-16 h-16 rounded-2xl object-cover shadow-sm ring-4 ring-white"
           />
           <div>
-            <p className="font-semibold text-gray-800 inter">{data.communityName}</p>
-            <p className="text-xs text-gray-500 inter">{data.city}, {data.country}</p>
+            <p className="font-bold text-gray-900 inter text-base leading-tight">
+              {data.communityName || "New Community"}
+            </p>
+            <p className="text-xs text-indigo-600 font-semibold uppercase tracking-wider mt-1">
+              Ready for activation
+            </p>
           </div>
         </div>
       )}
 
-      <Section title="Community">
-        <ReviewRow label="Name"        value={data.communityName}    icon={Globe} />
-        <ReviewRow label="Bio"         value={data.communityBio}     icon={Globe} />
-        <ReviewRow label="Website"     value={data.communityWebsite} icon={Globe} />
-        <ReviewRow label="Logo"        value={data.communityLogo ? "Uploaded ✓" : undefined} icon={Image} />
-      </Section>
-
-      <Section title="Contact">
-        <ReviewRow label="Country"  value={data.country}       icon={MapPin} />
-        <ReviewRow label="City"     value={data.city}          icon={MapPin} />
-        <ReviewRow label="Email"    value={data.officialEmail} icon={Mail} />
-        <ReviewRow label="Phone"    value={data.contactPhone}  icon={Phone} />
-      </Section>
-
-      {hasSocials && (
-        <Section title="Social Links">
-          <ReviewRow label="Twitter"   value={data.socialLinks?.twitter}   icon={Twitter} />
-          <ReviewRow label="LinkedIn"  value={data.socialLinks?.linkedin}  icon={Linkedin} />
-          <ReviewRow label="Instagram" value={data.socialLinks?.instagram} icon={Instagram} />
-          <ReviewRow label="GitHub"    value={data.socialLinks?.github}    icon={Github} />
-          <ReviewRow label="Facebook"  value={data.socialLinks?.facebook}  icon={Facebook} />
+      <div className="space-y-4">
+        <Section title="Community Details">
+          <ReviewRow label="Name"        value={data.communityName}    icon={Globe} />
+          <ReviewRow label="Tagline/Bio" value={data.communityBio}     icon={Globe} />
+          <ReviewRow label="Website"     value={data.communityWebsite} icon={Globe} />
         </Section>
-      )}
 
-      <Section title="Organizer Account">
-        <ReviewRow label="Full Name" value={data.fullName} icon={User} />
-        <ReviewRow label="Email"     value={data.email}    icon={Mail} />
-        <ReviewRow label="Password"  value="••••••••"      icon={Lock} />
-      </Section>
+        <Section title="Primary Contact">
+          <ReviewRow label="Location" value={data.city && data.country ? `${data.city}, ${data.country}` : undefined} icon={MapPin} />
+          <ReviewRow label="Official Email" value={data.officialEmail} icon={Mail} />
+          <ReviewRow label="Contact Phone" value={data.phoneCode && data.phoneNumber ? `${data.phoneCode} ${data.phoneNumber}` : undefined} icon={Phone} />
+        </Section>
 
-      <p className="text-xs text-gray-400 inter text-center pt-1">
-        By submitting, you agree to our Terms of Service and Privacy Policy.
+        {hasSocials && (
+          <Section title="Web Presence">
+            <ReviewRow label="Twitter"   value={data.socialLinks?.twitter}   icon={Twitter} />
+            <ReviewRow label="LinkedIn"  value={data.socialLinks?.linkedin}  icon={Linkedin} />
+            <ReviewRow label="Instagram" value={data.socialLinks?.instagram} icon={Instagram} />
+            <ReviewRow label="GitHub"    value={data.socialLinks?.github}    icon={Github} />
+            <ReviewRow label="Facebook"  value={data.socialLinks?.facebook}  icon={Facebook} />
+          </Section>
+        )}
+
+        <Section title="Administrator">
+          <ReviewRow label="Name"     value={data.fullName} icon={User} />
+          <ReviewRow label="Email"    value={data.email}    icon={Mail} />
+          <ReviewRow label="Security" value="••••••••"      icon={Lock} />
+        </Section>
+      </div>
+
+      <p className="text-[10px] text-gray-400 inter text-center pt-2 px-6">
+        By submitting, you confirm that all information provided is accurate and you agree to our Terms of Use.
       </p>
     </div>
   );

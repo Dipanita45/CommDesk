@@ -165,14 +165,8 @@ export default function CommunityStep() {
           <input
             id="communityWebsite"
             {...register("communityWebsite")}
-            placeholder="yourwebsite.com"
+            placeholder="example.com"
             className="flex-1 px-3 py-2.5 text-sm outline-none bg-transparent inter"
-            onBlur={(e) => {
-              const val = e.target.value.trim();
-              if (val && !val.startsWith("http://") && !val.startsWith("https://")) {
-                setValue("communityWebsite", `https://${val}`, { shouldValidate: true });
-              }
-            }}
           />
         </div>
         {errors.communityWebsite && (

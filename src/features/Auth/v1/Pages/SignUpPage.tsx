@@ -46,20 +46,34 @@ export default function SignUpPage() {
   const onSubmit = handleSubmit(async (data) => {
     setServerError(null);
     try {
-      await submitCommunitySignup(data);
+      const finalData = {
+        ...data,
+        contactPhone: `${data.phoneCode}${data.phoneNumber}`,
+      };
+      await submitCommunitySignup(finalData as any);
       setPost("email");
     } catch (err: unknown) {
       const e = err as { status?: number; data?: { message?: string; errors?: Record<string, string> } };
+      
       if (e.status === 422 && e.data?.errors) {
         Object.entries(e.data.errors).forEach(([rawField, msg]) => {
-          // Normalize snake_case backend keys → camelCase RHF keys
           const field = rawField.replace(/_([a-z])/g, (_, c: string) => c.toUpperCase());
           if (field in methods.getValues()) {
             setError(field as keyof SignupFormData, { message: msg });
           }
         });
       } else {
-        setServerError(e.data?.message ?? "Something went wrong. Please try again.");
+        const errorMessages: Record<number, string> = {
+          400: "Invalid request. Please check your information and try again.",
+          401: "Session expired. Please refresh the page.",
+          403: "You don't have permission to perform this action.",
+          409: "A community with these details already exists.",
+          429: "Too many requests. Please wait a moment before trying again.",
+          500: "Server error. Our engineers are investigating. Please try again later.",
+        };
+
+        const message = e.data?.message || (e.status ? errorMessages[e.status] : null) || "Unable to connect to service. Please check your internet connection.";
+        setServerError(message);
       }
     }
   });
@@ -73,55 +87,105 @@ export default function SignUpPage() {
   return (
     <div className="w-screen h-screen flex inter overflow-hidden">
       {/* Left panel */}
-      <div className="hidden lg:flex w-[45%] xl:w-[42%] relative flex-col">
-        <img
-          src="https://img.freepik.com/premium-photo/lego-man-with-glasses-holding-tablet-with-picture-man-holding-tablet_644690-181393.jpg?semt=ais_hybrid&w=740&q=80"
-          alt="Community"
-          className="w-full h-full object-cover absolute inset-0"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/80 via-indigo-800/60 to-purple-900/70" />
+      <div className="hidden lg:flex w-[45%] xl:w-[42%] relative flex-col overflow-hidden bg-indigo-950">
+        {/* Background Decorative Elements */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-600/20 blur-[120px] rounded-full" />
+          <div className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-indigo-600/20 blur-[120px] rounded-full" />
+        </div>
 
-        <div className="relative z-10 flex flex-col h-full p-10 justify-between">
-          {/* Logo */}
-          <div className="flex items-center gap-2.5">
-            <img src="/logoWithoutText.png" alt="Logo" className="w-10 h-10" />
-            <span className="text-xl font-bold text-white tracking-tight">CommDesk</span>
+        {/* Abstract Illustration Overlay */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none mix-blend-overlay">
+          <svg className="w-full h-full" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="0.5" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
+          </svg>
+        </div>
+
+        {/* Backdrop Gradient */}
+        <div className="absolute inset-0 bg-linear-to-br from-indigo-900/90 via-indigo-950/95 to-purple-900/90" />
+
+        <div className="relative z-10 flex flex-col h-full p-12 xl:p-16 justify-between">
+          {/* Logo Section */}
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-white/10 backdrop-blur-md rounded-xl border border-white/20">
+              <img src="/logoWithoutText.png" alt="Logo" className="w-8 h-8" />
+            </div>
+            <span className="text-2xl font-bold text-white tracking-tight">CommDesk</span>
           </div>
 
-          {/* Pitch */}
-          <div className="space-y-6">
-            <div>
-              <span className="inline-block text-xs font-semibold text-indigo-300 uppercase tracking-widest mb-3">
-                Join the future of community management
-              </span>
-              <h1 className="text-3xl xl:text-4xl font-bold text-white leading-tight">
-                Build something <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-300">
-                  extraordinary
+          {/* Main Content Area */}
+          <div className="space-y-10">
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-400/20">
+                <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
+                <span className="text-[10px] font-bold text-indigo-300 uppercase tracking-[0.2em]">
+                  The Future of Management
+                </span>
+              </div>
+              
+              <h1 className="text-4xl xl:text-5xl font-black text-white leading-[1.15]">
+                Empower Your <br />
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-300 via-purple-300 to-pink-300">
+                  Community
                 </span>
               </h1>
+              
+              <p className="text-indigo-100/70 text-lg leading-relaxed max-w-md font-medium">
+                The all-in-one workspace designed to help you organize, grow, and manage your members seamlessly.
+              </p>
             </div>
-            <p className="text-indigo-200 text-sm leading-relaxed max-w-xs">
-              CommDesk gives communities a powerful workspace to manage members, events, and communications in one place.
-            </p>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-4">
+            {/* Highlight Cards */}
+            <div className="space-y-4">
               {[
-                { value: "10k+", label: "Communities" },
-                { value: "500k+", label: "Members" },
-                { value: "99.9%", label: "Uptime" },
-                { value: "4.9★", label: "Rating" },
-              ].map(({ value, label }) => (
-                <div key={label} className="bg-white/10 backdrop-blur-sm rounded-xl p-3 border border-white/10">
-                  <p className="text-xl font-bold text-white">{value}</p>
-                  <p className="text-xs text-indigo-300 mt-0.5">{label}</p>
+                { 
+                  icon: <ArrowRight className="w-5 h-5" />, 
+                  title: "12k+ Communities", 
+                  desc: "Trusted by leaders worldwide.",
+                  color: "from-blue-500/20 to-indigo-500/20"
+                },
+                { 
+                  icon: <ArrowRight className="w-5 h-5" />, 
+                  title: "Real-time Insights", 
+                  desc: "Detailed analytics at your fingertips.",
+                  color: "from-purple-500/20 to-pink-500/20"
+                },
+                { 
+                  icon: <ArrowRight className="w-5 h-5" />, 
+                  title: "Scalable Infrastructure", 
+                  desc: "Grows with your community's needs.",
+                  color: "from-indigo-500/20 to-purple-500/20"
+                }
+              ].map((card, i) => (
+                <div 
+                  key={i} 
+                  className={`flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm transition-all hover:bg-white/10 hover:-translate-y-1 group`}
+                >
+                  <div className={`p-2.5 rounded-xl bg-linear-to-br ${card.color} border border-white/10 text-white shadow-lg`}>
+                    {card.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-white font-bold text-sm tracking-wide">{card.title}</h3>
+                    <p className="text-indigo-200/60 text-xs font-medium">{card.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <p className="text-indigo-400 text-xs">© {CURRENT_YEAR} CommDesk. All rights reserved.</p>
+          {/* Footer Info */}
+          <div className="flex items-center justify-between pt-8 border-t border-white/5">
+            <p className="text-indigo-400/60 text-xs font-medium">© {CURRENT_YEAR} CommDesk Inc.</p>
+            <div className="flex gap-4">
+              <div className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
+              <span className="text-[10px] font-bold text-indigo-400/60 uppercase tracking-wider">System Operational</span>
+            </div>
+          </div>
         </div>
       </div>
 
