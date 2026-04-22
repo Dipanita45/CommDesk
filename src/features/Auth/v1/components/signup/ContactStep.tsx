@@ -1,6 +1,7 @@
 import { useFormContext, Controller } from "react-hook-form";
 import { SignupFormData } from "../../hooks/useSignupForm";
-import { SearchableDropdown } from "../../../../Component/ui/SearchableDropdown";
+import { SearchableDropdown } from "@/Component/ui/SearchableDropdown";
+
 
 const COUNTRIES = [
   "Afghanistan", "Albania", "Algeria", "Australia", "Austria", "Bangladesh",
